@@ -6,7 +6,7 @@ syntax = "proto3";
 
 package proto;
 //option go_package = "";
-option go_package = "github.com/headend/agent-service/proto";
+option go_package = "github.com/headend/iptv-agent-service/proto";
 
 message Agent {
     int64 id = 1 [json_name = "id"];
