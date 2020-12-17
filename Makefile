@@ -1,6 +1,6 @@
 build:
-		protoc -I proto/ proto/agentctl.proto --go_out=plugins=grpc:proto/
-		GOOS=linux GOARCH=amd64 go build -o deployment/agent-crontrol-service main.go
+		protoc -I proto/ proto/agent.proto --go_out=plugins=grpc:proto/
+		GOOS=linux GOARCH=amd64 go build -o deployment/agent-service main.go
 		docker build -t agent-services-server deployments
 run:
 		docker run -p 50006:50006 -v /opt/centertower/application.yml:/opt/centertower/application.yml  -v /opt/centertower/keys/:/opt/centertower/keys/ -d agent-services-server
