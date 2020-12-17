@@ -1,7 +1,6 @@
 package agent_services
 
 import (
-	"fmt"
 	"github.com/headend/share-module/configuration"
 	agentctlpb "github.com/headend/iptv-agent-service/proto"
 	"google.golang.org/grpc"
