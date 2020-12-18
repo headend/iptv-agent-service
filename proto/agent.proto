@@ -50,6 +50,11 @@ message AgentFilter {
     string location = 3 [json_name = "location"];
 }
 
+message AgentDelete {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+}
+
 message AgentGetAll {
 }
 
@@ -95,7 +100,7 @@ service AgentCTLService {
     /**
     * Delete Agent
     */
-    rpc Delete (AgentFilter) returns(AgentResponse){
+    rpc Delete (AgentDelete) returns(AgentResponse){
     }
 }
 
