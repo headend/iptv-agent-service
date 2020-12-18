@@ -1,5 +1,9 @@
+proto:
+		protoc -I proto/ proto/agent.proto --go_out=plugins=grpc:proto/
+		cp proto/github.com/headend/iptv-agent-service/proto/agent.pb.go proto/
 build:
 		protoc -I proto/ proto/agent.proto --go_out=plugins=grpc:proto/
+		cp proto/github.com/headend/iptv-agent-service/proto/agent.pb.go proto/
 		GOOS=linux GOARCH=amd64 go build -o deployment/agent-service main.go
 		docker build -t agent-services-server deployments
 run:

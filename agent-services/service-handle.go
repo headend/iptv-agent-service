@@ -6,7 +6,7 @@ import (
 )
 
 
-func (c *agentServer) Gets(ctx context.Context, in *agentpb.AgentRequest) (*agentpb.AgentResponse, error) {
+func (c *agentServer) Gets(ctx context.Context, in *agentpb.AgentGetAll) (*agentpb.AgentResponse, error) {
 	return nil, nil
 }
 

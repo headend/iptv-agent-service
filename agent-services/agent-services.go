@@ -1,8 +1,8 @@
 package agent_services
 
 import (
+	agentpb "github.com/headend/iptv-agent-service/proto"
 	"github.com/headend/share-module/configuration"
-	agentctlpb "github.com/headend/iptv-agent-service/proto"
 	"google.golang.org/grpc"
 	"log"
 	"net"
@@ -23,7 +23,7 @@ func StartServer()  {
 	}
 
 	rpcServer := grpc.NewServer()
-	agentctlpb.RegisterAgentServiceServer(rpcServer, &agentServer(config:&config))
+	agentpb.RegisterAgentCTLServiceServer(rpcServer, &agentServer{config:&config})
 	if rpcServer == nil {
 		log.Fatalf("failed to register server: %v", err)
 	}
