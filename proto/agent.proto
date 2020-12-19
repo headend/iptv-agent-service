@@ -23,6 +23,7 @@ message Agent {
     bool audio_monitor = 12 [json_name = "audio_monitor"];
     int64 run_thread = 13 [json_name = "run_thread"];
     string date_create = 14 [json_name = "date_create"];
+    bool status = 15 [json_name = "status"];
 }
 
 /**
@@ -42,6 +43,7 @@ message AgentRequest {
     bool video_monitor = 11 [json_name = "video_monitor"];
     bool audio_monitor = 12 [json_name = "audio_monitor"];
     int64 run_thread = 13 [json_name = "run_thread"];
+    bool status = 14 [json_name = "status"];
 }
 
 message AgentFilter {

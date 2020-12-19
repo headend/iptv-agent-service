@@ -87,6 +87,7 @@ func (c *agentServer) Add(ctx context.Context, in *agentpb.AgentRequest) (*agent
 		Video_Monitor:        in.VideoMonitor,
 		Audio_Monitor:        in.AudioMonitor,
 		Run_Thread:           in.RunThread,
+		Status: 			  in.Status,
 	}
 	var agentProto agentpb.Agent
 	err := c.DB.Db.Create(&agentModel).Updates(map[string]interface{}{"date_create": time.Now(), "date_update": time.Now()}).Scan(&agentProto).Error
@@ -156,6 +157,9 @@ func (c *agentServer) Update(ctx context.Context, in *agentpb.AgentRequest) (*ag
 	if in.RunThread != oldAgentModel.Run_Thread {
 		changeList["run_thread"] = in.RunThread
 	}
+	if in.Status != oldAgentModel.Status {
+		changeList["status"] = in.Status
+	}
 	if len(changeList) == 0 {
 		return &agentpb.AgentResponse{Status:agentpb.AgentResponseStatus_SUCCESS}, status.Errorf(200, "Not change")
 	}
@@ -223,6 +227,7 @@ func ConvertModelToProtoType(tmp *model.Agent) agentpb.Agent {
 		AudioMonitor:       tmp.Audio_Monitor,
 		RunThread:          tmp.Run_Thread,
 		DateCreate:         tmp.Date_create.String(),
+		Status:				tmp.Status,
 	}
 	return agent
 }

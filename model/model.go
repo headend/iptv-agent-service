@@ -22,5 +22,6 @@ type Agent struct {
 	Run_Thread			int64 `gorm:"column:run_thread;type:number;default:1"`
 	Date_create			time.Time `gorm:"column:date_create;type:datetime;default:null"`
 	Date_update			time.Time `gorm:"column:date_update;type:datetime;default:null"`
+	Status				bool `gorm:"column:status;default:false"`
 }
 
