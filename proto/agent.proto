@@ -52,6 +52,43 @@ message AgentFilter {
     string location = 3 [json_name = "location"];
 }
 
+
+message AgentUpdateStatus {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    bool status = 3 [json_name = "status"];
+}
+
+message AgentActiveMonitor {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    bool is_monitor = 3 [json_name = "is_monitor"];
+}
+
+message AgentActiveMonitorVideo {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    bool video_monitor = 3 [json_name = "video_monitor"];
+}
+
+message AgentActiveMonitorSignal {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    bool signal_monitor = 3 [json_name = "signal_monitor"];
+}
+
+message AgentActiveMonitorAudio {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    bool audio_monitor = 3 [json_name = "audio_monitor"];
+}
+
+message AgentUpdateMonitorRunThread {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    int64 run_thread = 3 [json_name = "run_thread"];
+}
+
 message AgentDelete {
     int64 id = 1 [json_name = "id"];
     string ip_control = 2 [json_name = "ip_control"];
@@ -97,6 +134,36 @@ service AgentCTLService {
     * Update Agent
     */
     rpc Update (AgentRequest) returns (AgentResponse) {
+    }
+
+    /**
+    * Update Agent status
+    */
+    rpc UpdateStatus (AgentUpdateStatus) returns (AgentResponse) {
+    }
+
+    /**
+    * Update Agent
+    */
+    rpc UpdateRunthread (AgentUpdateMonitorRunThread) returns (AgentResponse) {
+    }
+
+    /**
+    * Active monitor
+    */
+    rpc UpdateActiveMonitor (AgentActiveMonitor) returns (AgentResponse) {
+    }
+
+    /**
+    * Active monitor
+    */
+    rpc UpdateMonitorSignal (AgentActiveMonitorSignal) returns (AgentResponse) {
+    }
+
+    /**
+    * Active monitor video
+    */
+    rpc UpdateMonitorVideo (AgentActiveMonitorVideo) returns (AgentResponse) {
     }
 
     /**

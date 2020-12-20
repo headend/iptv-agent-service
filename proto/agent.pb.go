@@ -450,6 +450,384 @@ func (x *AgentFilter) GetLocation() string {
 	return ""
 }
 
+type AgentUpdateStatus struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpControl string `protobuf:"bytes,2,opt,name=ip_control,proto3" json:"ip_control,omitempty"`
+	Status    bool   `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (x *AgentUpdateStatus) Reset() {
+	*x = AgentUpdateStatus{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_agent_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AgentUpdateStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentUpdateStatus) ProtoMessage() {}
+
+func (x *AgentUpdateStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentUpdateStatus.ProtoReflect.Descriptor instead.
+func (*AgentUpdateStatus) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AgentUpdateStatus) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AgentUpdateStatus) GetIpControl() string {
+	if x != nil {
+		return x.IpControl
+	}
+	return ""
+}
+
+func (x *AgentUpdateStatus) GetStatus() bool {
+	if x != nil {
+		return x.Status
+	}
+	return false
+}
+
+type AgentActiveMonitor struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpControl string `protobuf:"bytes,2,opt,name=ip_control,proto3" json:"ip_control,omitempty"`
+	IsMonitor bool   `protobuf:"varint,3,opt,name=is_monitor,proto3" json:"is_monitor,omitempty"`
+}
+
+func (x *AgentActiveMonitor) Reset() {
+	*x = AgentActiveMonitor{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_agent_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AgentActiveMonitor) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentActiveMonitor) ProtoMessage() {}
+
+func (x *AgentActiveMonitor) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentActiveMonitor.ProtoReflect.Descriptor instead.
+func (*AgentActiveMonitor) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AgentActiveMonitor) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AgentActiveMonitor) GetIpControl() string {
+	if x != nil {
+		return x.IpControl
+	}
+	return ""
+}
+
+func (x *AgentActiveMonitor) GetIsMonitor() bool {
+	if x != nil {
+		return x.IsMonitor
+	}
+	return false
+}
+
+type AgentActiveMonitorVideo struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpControl    string `protobuf:"bytes,2,opt,name=ip_control,proto3" json:"ip_control,omitempty"`
+	VideoMonitor bool   `protobuf:"varint,3,opt,name=video_monitor,proto3" json:"video_monitor,omitempty"`
+}
+
+func (x *AgentActiveMonitorVideo) Reset() {
+	*x = AgentActiveMonitorVideo{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_agent_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AgentActiveMonitorVideo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentActiveMonitorVideo) ProtoMessage() {}
+
+func (x *AgentActiveMonitorVideo) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentActiveMonitorVideo.ProtoReflect.Descriptor instead.
+func (*AgentActiveMonitorVideo) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AgentActiveMonitorVideo) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AgentActiveMonitorVideo) GetIpControl() string {
+	if x != nil {
+		return x.IpControl
+	}
+	return ""
+}
+
+func (x *AgentActiveMonitorVideo) GetVideoMonitor() bool {
+	if x != nil {
+		return x.VideoMonitor
+	}
+	return false
+}
+
+type AgentActiveMonitorSignal struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id            int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpControl     string `protobuf:"bytes,2,opt,name=ip_control,proto3" json:"ip_control,omitempty"`
+	SignalMonitor bool   `protobuf:"varint,3,opt,name=signal_monitor,proto3" json:"signal_monitor,omitempty"`
+}
+
+func (x *AgentActiveMonitorSignal) Reset() {
+	*x = AgentActiveMonitorSignal{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_agent_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AgentActiveMonitorSignal) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentActiveMonitorSignal) ProtoMessage() {}
+
+func (x *AgentActiveMonitorSignal) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentActiveMonitorSignal.ProtoReflect.Descriptor instead.
+func (*AgentActiveMonitorSignal) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *AgentActiveMonitorSignal) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AgentActiveMonitorSignal) GetIpControl() string {
+	if x != nil {
+		return x.IpControl
+	}
+	return ""
+}
+
+func (x *AgentActiveMonitorSignal) GetSignalMonitor() bool {
+	if x != nil {
+		return x.SignalMonitor
+	}
+	return false
+}
+
+type AgentActiveMonitorAudio struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id           int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpControl    string `protobuf:"bytes,2,opt,name=ip_control,proto3" json:"ip_control,omitempty"`
+	AudioMonitor bool   `protobuf:"varint,3,opt,name=audio_monitor,proto3" json:"audio_monitor,omitempty"`
+}
+
+func (x *AgentActiveMonitorAudio) Reset() {
+	*x = AgentActiveMonitorAudio{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_agent_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AgentActiveMonitorAudio) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentActiveMonitorAudio) ProtoMessage() {}
+
+func (x *AgentActiveMonitorAudio) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentActiveMonitorAudio.ProtoReflect.Descriptor instead.
+func (*AgentActiveMonitorAudio) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *AgentActiveMonitorAudio) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AgentActiveMonitorAudio) GetIpControl() string {
+	if x != nil {
+		return x.IpControl
+	}
+	return ""
+}
+
+func (x *AgentActiveMonitorAudio) GetAudioMonitor() bool {
+	if x != nil {
+		return x.AudioMonitor
+	}
+	return false
+}
+
+type AgentUpdateMonitorRunThread struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id        int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpControl string `protobuf:"bytes,2,opt,name=ip_control,proto3" json:"ip_control,omitempty"`
+	RunThread int64  `protobuf:"varint,3,opt,name=run_thread,proto3" json:"run_thread,omitempty"`
+}
+
+func (x *AgentUpdateMonitorRunThread) Reset() {
+	*x = AgentUpdateMonitorRunThread{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_agent_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AgentUpdateMonitorRunThread) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AgentUpdateMonitorRunThread) ProtoMessage() {}
+
+func (x *AgentUpdateMonitorRunThread) ProtoReflect() protoreflect.Message {
+	mi := &file_agent_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AgentUpdateMonitorRunThread.ProtoReflect.Descriptor instead.
+func (*AgentUpdateMonitorRunThread) Descriptor() ([]byte, []int) {
+	return file_agent_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *AgentUpdateMonitorRunThread) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *AgentUpdateMonitorRunThread) GetIpControl() string {
+	if x != nil {
+		return x.IpControl
+	}
+	return ""
+}
+
+func (x *AgentUpdateMonitorRunThread) GetRunThread() int64 {
+	if x != nil {
+		return x.RunThread
+	}
+	return 0
+}
+
 type AgentDelete struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -462,7 +840,7 @@ type AgentDelete struct {
 func (x *AgentDelete) Reset() {
 	*x = AgentDelete{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_agent_proto_msgTypes[3]
+		mi := &file_agent_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -475,7 +853,7 @@ func (x *AgentDelete) String() string {
 func (*AgentDelete) ProtoMessage() {}
 
 func (x *AgentDelete) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[3]
+	mi := &file_agent_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -488,7 +866,7 @@ func (x *AgentDelete) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentDelete.ProtoReflect.Descriptor instead.
 func (*AgentDelete) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{3}
+	return file_agent_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AgentDelete) GetId() int64 {
@@ -514,7 +892,7 @@ type AgentGetAll struct {
 func (x *AgentGetAll) Reset() {
 	*x = AgentGetAll{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_agent_proto_msgTypes[4]
+		mi := &file_agent_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -527,7 +905,7 @@ func (x *AgentGetAll) String() string {
 func (*AgentGetAll) ProtoMessage() {}
 
 func (x *AgentGetAll) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[4]
+	mi := &file_agent_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -540,7 +918,7 @@ func (x *AgentGetAll) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentGetAll.ProtoReflect.Descriptor instead.
 func (*AgentGetAll) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{4}
+	return file_agent_proto_rawDescGZIP(), []int{10}
 }
 
 type AgentResponse struct {
@@ -559,7 +937,7 @@ type AgentResponse struct {
 func (x *AgentResponse) Reset() {
 	*x = AgentResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_agent_proto_msgTypes[5]
+		mi := &file_agent_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -572,7 +950,7 @@ func (x *AgentResponse) String() string {
 func (*AgentResponse) ProtoMessage() {}
 
 func (x *AgentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_agent_proto_msgTypes[5]
+	mi := &file_agent_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -585,7 +963,7 @@ func (x *AgentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AgentResponse.ProtoReflect.Descriptor instead.
 func (*AgentResponse) Descriptor() ([]byte, []int) {
-	return file_agent_proto_rawDescGZIP(), []int{5}
+	return file_agent_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *AgentResponse) GetStatus() AgentResponseStatus {
@@ -667,43 +1045,107 @@ var file_agent_proto_rawDesc = []byte{
 	0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
 	0x12, 0x1a, 0x0a, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x3d, 0x0a, 0x0b,
-	0x41, 0x67, 0x65, 0x6e, 0x74, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x69,
-	0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x22, 0x0d, 0x0a, 0x0b, 0x41,
-	0x67, 0x65, 0x6e, 0x74, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x22, 0x67, 0x0a, 0x0d, 0x41, 0x67,
-	0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x32, 0x0a, 0x06, 0x53,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
-	0x22, 0x0a, 0x06, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32,
-	0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x04, 0x64,
-	0x61, 0x74, 0x61, 0x2a, 0x2c, 0x0a, 0x13, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x08, 0x0a, 0x04, 0x46, 0x41,
-	0x49, 0x4c, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x55, 0x43, 0x43, 0x45, 0x53, 0x53, 0x10,
-	0x01, 0x32, 0x99, 0x02, 0x0a, 0x0f, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x43, 0x54, 0x4c, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x32, 0x0a, 0x04, 0x47, 0x65, 0x74, 0x73, 0x12, 0x12, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x47, 0x65, 0x74, 0x41, 0x6c,
-	0x6c, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x31, 0x0a, 0x03, 0x47, 0x65, 0x74,
-	0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x46, 0x69,
-	0x6c, 0x74, 0x65, 0x72, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65,
-	0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x32, 0x0a, 0x03,
-	0x41, 0x64, 0x64, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e,
-	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x28, 0x09, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x5b, 0x0a, 0x11,
+	0x41, 0x67, 0x65, 0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x73, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69,
+	0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f,
+	0x6c, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x64, 0x0a, 0x12, 0x41, 0x67, 0x65,
+	0x6e, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x1e, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x12,
+	0x1e, 0x0a, 0x0a, 0x69, 0x73, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x22,
+	0x6f, 0x0a, 0x17, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x4d, 0x6f,
+	0x6e, 0x69, 0x74, 0x6f, 0x72, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x70,
+	0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x12, 0x24, 0x0a, 0x0d, 0x76, 0x69,
+	0x64, 0x65, 0x6f, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0d, 0x76, 0x69, 0x64, 0x65, 0x6f, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72,
+	0x22, 0x72, 0x0a, 0x18, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x4d,
+	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x6c, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1e, 0x0a, 0x0a,
+	0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x12, 0x26, 0x0a, 0x0e,
+	0x73, 0x69, 0x67, 0x6e, 0x61, 0x6c, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x6c, 0x5f, 0x6d, 0x6f, 0x6e,
+	0x69, 0x74, 0x6f, 0x72, 0x22, 0x6f, 0x0a, 0x17, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x41, 0x63, 0x74,
+	0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x41, 0x75, 0x64, 0x69, 0x6f, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12,
+	0x1e, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x12,
+	0x24, 0x0a, 0x0d, 0x61, 0x75, 0x64, 0x69, 0x6f, 0x5f, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0d, 0x61, 0x75, 0x64, 0x69, 0x6f, 0x5f, 0x6d, 0x6f,
+	0x6e, 0x69, 0x74, 0x6f, 0x72, 0x22, 0x6d, 0x0a, 0x1b, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x52, 0x75, 0x6e, 0x54, 0x68,
+	0x72, 0x65, 0x61, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x02, 0x69, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72,
+	0x6f, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e,
+	0x74, 0x72, 0x6f, 0x6c, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x75, 0x6e, 0x5f, 0x74, 0x68, 0x72, 0x65,
+	0x61, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x72, 0x75, 0x6e, 0x5f, 0x74, 0x68,
+	0x72, 0x65, 0x61, 0x64, 0x22, 0x3d, 0x0a, 0x0b, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f,
+	0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x69, 0x70, 0x5f, 0x63, 0x6f, 0x6e, 0x74,
+	0x72, 0x6f, 0x6c, 0x22, 0x0d, 0x0a, 0x0b, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x47, 0x65, 0x74, 0x41,
+	0x6c, 0x6c, 0x22, 0x67, 0x0a, 0x0d, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x32, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e,
+	0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52,
+	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x22, 0x0a, 0x06, 0x61, 0x67, 0x65, 0x6e, 0x74,
+	0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x2a, 0x2c, 0x0a, 0x13, 0x41,
+	0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x12, 0x08, 0x0a, 0x04, 0x46, 0x41, 0x49, 0x4c, 0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07,
+	0x53, 0x55, 0x43, 0x43, 0x45, 0x53, 0x53, 0x10, 0x01, 0x32, 0x92, 0x05, 0x0a, 0x0f, 0x41, 0x67,
+	0x65, 0x6e, 0x74, 0x43, 0x54, 0x4c, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x32, 0x0a,
+	0x04, 0x47, 0x65, 0x74, 0x73, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67,
+	0x65, 0x6e, 0x74, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x6c, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x12, 0x31, 0x0a, 0x03, 0x47, 0x65, 0x74, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x46, 0x69, 0x6c, 0x74, 0x65, 0x72, 0x1a, 0x14, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x12, 0x32, 0x0a, 0x03, 0x41, 0x64, 0x64, 0x12, 0x13, 0x2e, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x35, 0x0a, 0x06, 0x55, 0x70, 0x64, 0x61,
+	0x74, 0x65, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12,
+	0x40, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
+	0x18, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x00, 0x12, 0x4d, 0x0a, 0x0f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x52, 0x75, 0x6e, 0x74, 0x68,
+	0x72, 0x65, 0x61, 0x64, 0x12, 0x22, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65,
+	0x6e, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x52,
+	0x75, 0x6e, 0x54, 0x68, 0x72, 0x65, 0x61, 0x64, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x12, 0x35, 0x0a, 0x06, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x12, 0x13, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x34, 0x0a, 0x06, 0x44, 0x65, 0x6c, 0x65, 0x74,
-	0x65, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x44,
-	0x65, 0x6c, 0x65, 0x74, 0x65, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67,
-	0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x2d, 0x5a,
-	0x2b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x68, 0x65, 0x61, 0x64,
-	0x65, 0x6e, 0x64, 0x2f, 0x69, 0x70, 0x74, 0x76, 0x2d, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2d, 0x73,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x12, 0x48, 0x0a, 0x13, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65,
+	0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e,
+	0x41, 0x67, 0x65, 0x6e, 0x74, 0x41, 0x63, 0x74, 0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74,
+	0x6f, 0x72, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4e, 0x0a, 0x13, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x53, 0x69, 0x67, 0x6e, 0x61,
+	0x6c, 0x12, 0x1f, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x41,
+	0x63, 0x74, 0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x53, 0x69, 0x67, 0x6e,
+	0x61, 0x6c, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4c, 0x0a, 0x12, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x56, 0x69, 0x64, 0x65, 0x6f,
+	0x12, 0x1e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x41, 0x63,
+	0x74, 0x69, 0x76, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x56, 0x69, 0x64, 0x65, 0x6f,
+	0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x34, 0x0a, 0x06, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41,
+	0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x2d,
+	0x5a, 0x2b, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x68, 0x65, 0x61,
+	0x64, 0x65, 0x6e, 0x64, 0x2f, 0x69, 0x70, 0x74, 0x76, 0x2d, 0x61, 0x67, 0x65, 0x6e, 0x74, 0x2d,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -719,34 +1161,50 @@ func file_agent_proto_rawDescGZIP() []byte {
 }
 
 var file_agent_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_agent_proto_goTypes = []interface{}{
-	(AgentResponseStatus)(0), // 0: proto.AgentResponseStatus
-	(*Agent)(nil),            // 1: proto.Agent
-	(*AgentRequest)(nil),     // 2: proto.AgentRequest
-	(*AgentFilter)(nil),      // 3: proto.AgentFilter
-	(*AgentDelete)(nil),      // 4: proto.AgentDelete
-	(*AgentGetAll)(nil),      // 5: proto.AgentGetAll
-	(*AgentResponse)(nil),    // 6: proto.AgentResponse
+	(AgentResponseStatus)(0),            // 0: proto.AgentResponseStatus
+	(*Agent)(nil),                       // 1: proto.Agent
+	(*AgentRequest)(nil),                // 2: proto.AgentRequest
+	(*AgentFilter)(nil),                 // 3: proto.AgentFilter
+	(*AgentUpdateStatus)(nil),           // 4: proto.AgentUpdateStatus
+	(*AgentActiveMonitor)(nil),          // 5: proto.AgentActiveMonitor
+	(*AgentActiveMonitorVideo)(nil),     // 6: proto.AgentActiveMonitorVideo
+	(*AgentActiveMonitorSignal)(nil),    // 7: proto.AgentActiveMonitorSignal
+	(*AgentActiveMonitorAudio)(nil),     // 8: proto.AgentActiveMonitorAudio
+	(*AgentUpdateMonitorRunThread)(nil), // 9: proto.AgentUpdateMonitorRunThread
+	(*AgentDelete)(nil),                 // 10: proto.AgentDelete
+	(*AgentGetAll)(nil),                 // 11: proto.AgentGetAll
+	(*AgentResponse)(nil),               // 12: proto.AgentResponse
 }
 var file_agent_proto_depIdxs = []int32{
-	0, // 0: proto.AgentResponse.Status:type_name -> proto.AgentResponseStatus
-	1, // 1: proto.AgentResponse.agents:type_name -> proto.Agent
-	5, // 2: proto.AgentCTLService.Gets:input_type -> proto.AgentGetAll
-	3, // 3: proto.AgentCTLService.Get:input_type -> proto.AgentFilter
-	2, // 4: proto.AgentCTLService.Add:input_type -> proto.AgentRequest
-	2, // 5: proto.AgentCTLService.Update:input_type -> proto.AgentRequest
-	4, // 6: proto.AgentCTLService.Delete:input_type -> proto.AgentDelete
-	6, // 7: proto.AgentCTLService.Gets:output_type -> proto.AgentResponse
-	6, // 8: proto.AgentCTLService.Get:output_type -> proto.AgentResponse
-	6, // 9: proto.AgentCTLService.Add:output_type -> proto.AgentResponse
-	6, // 10: proto.AgentCTLService.Update:output_type -> proto.AgentResponse
-	6, // 11: proto.AgentCTLService.Delete:output_type -> proto.AgentResponse
-	7, // [7:12] is the sub-list for method output_type
-	2, // [2:7] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	0,  // 0: proto.AgentResponse.Status:type_name -> proto.AgentResponseStatus
+	1,  // 1: proto.AgentResponse.agents:type_name -> proto.Agent
+	11, // 2: proto.AgentCTLService.Gets:input_type -> proto.AgentGetAll
+	3,  // 3: proto.AgentCTLService.Get:input_type -> proto.AgentFilter
+	2,  // 4: proto.AgentCTLService.Add:input_type -> proto.AgentRequest
+	2,  // 5: proto.AgentCTLService.Update:input_type -> proto.AgentRequest
+	4,  // 6: proto.AgentCTLService.UpdateStatus:input_type -> proto.AgentUpdateStatus
+	9,  // 7: proto.AgentCTLService.UpdateRunthread:input_type -> proto.AgentUpdateMonitorRunThread
+	5,  // 8: proto.AgentCTLService.UpdateActiveMonitor:input_type -> proto.AgentActiveMonitor
+	7,  // 9: proto.AgentCTLService.UpdateMonitorSignal:input_type -> proto.AgentActiveMonitorSignal
+	6,  // 10: proto.AgentCTLService.UpdateMonitorVideo:input_type -> proto.AgentActiveMonitorVideo
+	10, // 11: proto.AgentCTLService.Delete:input_type -> proto.AgentDelete
+	12, // 12: proto.AgentCTLService.Gets:output_type -> proto.AgentResponse
+	12, // 13: proto.AgentCTLService.Get:output_type -> proto.AgentResponse
+	12, // 14: proto.AgentCTLService.Add:output_type -> proto.AgentResponse
+	12, // 15: proto.AgentCTLService.Update:output_type -> proto.AgentResponse
+	12, // 16: proto.AgentCTLService.UpdateStatus:output_type -> proto.AgentResponse
+	12, // 17: proto.AgentCTLService.UpdateRunthread:output_type -> proto.AgentResponse
+	12, // 18: proto.AgentCTLService.UpdateActiveMonitor:output_type -> proto.AgentResponse
+	12, // 19: proto.AgentCTLService.UpdateMonitorSignal:output_type -> proto.AgentResponse
+	12, // 20: proto.AgentCTLService.UpdateMonitorVideo:output_type -> proto.AgentResponse
+	12, // 21: proto.AgentCTLService.Delete:output_type -> proto.AgentResponse
+	12, // [12:22] is the sub-list for method output_type
+	2,  // [2:12] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_agent_proto_init() }
@@ -792,7 +1250,7 @@ func file_agent_proto_init() {
 			}
 		}
 		file_agent_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AgentDelete); i {
+			switch v := v.(*AgentUpdateStatus); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -804,7 +1262,7 @@ func file_agent_proto_init() {
 			}
 		}
 		file_agent_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AgentGetAll); i {
+			switch v := v.(*AgentActiveMonitor); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -816,6 +1274,78 @@ func file_agent_proto_init() {
 			}
 		}
 		file_agent_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AgentActiveMonitorVideo); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_agent_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AgentActiveMonitorSignal); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_agent_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AgentActiveMonitorAudio); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_agent_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AgentUpdateMonitorRunThread); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_agent_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AgentDelete); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_agent_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AgentGetAll); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_agent_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AgentResponse); i {
 			case 0:
 				return &v.state
@@ -834,7 +1364,7 @@ func file_agent_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_agent_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   6,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -873,6 +1403,21 @@ type AgentCTLServiceClient interface {
 	//*
 	// Update Agent
 	Update(ctx context.Context, in *AgentRequest, opts ...grpc.CallOption) (*AgentResponse, error)
+	//*
+	// Update Agent status
+	UpdateStatus(ctx context.Context, in *AgentUpdateStatus, opts ...grpc.CallOption) (*AgentResponse, error)
+	//*
+	// Update Agent
+	UpdateRunthread(ctx context.Context, in *AgentUpdateMonitorRunThread, opts ...grpc.CallOption) (*AgentResponse, error)
+	//*
+	// Active monitor
+	UpdateActiveMonitor(ctx context.Context, in *AgentActiveMonitor, opts ...grpc.CallOption) (*AgentResponse, error)
+	//*
+	// Active monitor
+	UpdateMonitorSignal(ctx context.Context, in *AgentActiveMonitorSignal, opts ...grpc.CallOption) (*AgentResponse, error)
+	//*
+	// Active monitor video
+	UpdateMonitorVideo(ctx context.Context, in *AgentActiveMonitorVideo, opts ...grpc.CallOption) (*AgentResponse, error)
 	//*
 	// Delete Agent
 	Delete(ctx context.Context, in *AgentDelete, opts ...grpc.CallOption) (*AgentResponse, error)
@@ -922,6 +1467,51 @@ func (c *agentCTLServiceClient) Update(ctx context.Context, in *AgentRequest, op
 	return out, nil
 }
 
+func (c *agentCTLServiceClient) UpdateStatus(ctx context.Context, in *AgentUpdateStatus, opts ...grpc.CallOption) (*AgentResponse, error) {
+	out := new(AgentResponse)
+	err := c.cc.Invoke(ctx, "/proto.AgentCTLService/UpdateStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentCTLServiceClient) UpdateRunthread(ctx context.Context, in *AgentUpdateMonitorRunThread, opts ...grpc.CallOption) (*AgentResponse, error) {
+	out := new(AgentResponse)
+	err := c.cc.Invoke(ctx, "/proto.AgentCTLService/UpdateRunthread", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentCTLServiceClient) UpdateActiveMonitor(ctx context.Context, in *AgentActiveMonitor, opts ...grpc.CallOption) (*AgentResponse, error) {
+	out := new(AgentResponse)
+	err := c.cc.Invoke(ctx, "/proto.AgentCTLService/UpdateActiveMonitor", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentCTLServiceClient) UpdateMonitorSignal(ctx context.Context, in *AgentActiveMonitorSignal, opts ...grpc.CallOption) (*AgentResponse, error) {
+	out := new(AgentResponse)
+	err := c.cc.Invoke(ctx, "/proto.AgentCTLService/UpdateMonitorSignal", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *agentCTLServiceClient) UpdateMonitorVideo(ctx context.Context, in *AgentActiveMonitorVideo, opts ...grpc.CallOption) (*AgentResponse, error) {
+	out := new(AgentResponse)
+	err := c.cc.Invoke(ctx, "/proto.AgentCTLService/UpdateMonitorVideo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *agentCTLServiceClient) Delete(ctx context.Context, in *AgentDelete, opts ...grpc.CallOption) (*AgentResponse, error) {
 	out := new(AgentResponse)
 	err := c.cc.Invoke(ctx, "/proto.AgentCTLService/Delete", in, out, opts...)
@@ -946,6 +1536,21 @@ type AgentCTLServiceServer interface {
 	// Update Agent
 	Update(context.Context, *AgentRequest) (*AgentResponse, error)
 	//*
+	// Update Agent status
+	UpdateStatus(context.Context, *AgentUpdateStatus) (*AgentResponse, error)
+	//*
+	// Update Agent
+	UpdateRunthread(context.Context, *AgentUpdateMonitorRunThread) (*AgentResponse, error)
+	//*
+	// Active monitor
+	UpdateActiveMonitor(context.Context, *AgentActiveMonitor) (*AgentResponse, error)
+	//*
+	// Active monitor
+	UpdateMonitorSignal(context.Context, *AgentActiveMonitorSignal) (*AgentResponse, error)
+	//*
+	// Active monitor video
+	UpdateMonitorVideo(context.Context, *AgentActiveMonitorVideo) (*AgentResponse, error)
+	//*
 	// Delete Agent
 	Delete(context.Context, *AgentDelete) (*AgentResponse, error)
 }
@@ -965,6 +1570,21 @@ func (*UnimplementedAgentCTLServiceServer) Add(context.Context, *AgentRequest) (
 }
 func (*UnimplementedAgentCTLServiceServer) Update(context.Context, *AgentRequest) (*AgentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (*UnimplementedAgentCTLServiceServer) UpdateStatus(context.Context, *AgentUpdateStatus) (*AgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateStatus not implemented")
+}
+func (*UnimplementedAgentCTLServiceServer) UpdateRunthread(context.Context, *AgentUpdateMonitorRunThread) (*AgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRunthread not implemented")
+}
+func (*UnimplementedAgentCTLServiceServer) UpdateActiveMonitor(context.Context, *AgentActiveMonitor) (*AgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateActiveMonitor not implemented")
+}
+func (*UnimplementedAgentCTLServiceServer) UpdateMonitorSignal(context.Context, *AgentActiveMonitorSignal) (*AgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMonitorSignal not implemented")
+}
+func (*UnimplementedAgentCTLServiceServer) UpdateMonitorVideo(context.Context, *AgentActiveMonitorVideo) (*AgentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMonitorVideo not implemented")
 }
 func (*UnimplementedAgentCTLServiceServer) Delete(context.Context, *AgentDelete) (*AgentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -1046,6 +1666,96 @@ func _AgentCTLService_Update_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AgentCTLService_UpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentUpdateStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentCTLServiceServer).UpdateStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.AgentCTLService/UpdateStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentCTLServiceServer).UpdateStatus(ctx, req.(*AgentUpdateStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentCTLService_UpdateRunthread_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentUpdateMonitorRunThread)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentCTLServiceServer).UpdateRunthread(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.AgentCTLService/UpdateRunthread",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentCTLServiceServer).UpdateRunthread(ctx, req.(*AgentUpdateMonitorRunThread))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentCTLService_UpdateActiveMonitor_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentActiveMonitor)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentCTLServiceServer).UpdateActiveMonitor(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.AgentCTLService/UpdateActiveMonitor",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentCTLServiceServer).UpdateActiveMonitor(ctx, req.(*AgentActiveMonitor))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentCTLService_UpdateMonitorSignal_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentActiveMonitorSignal)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentCTLServiceServer).UpdateMonitorSignal(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.AgentCTLService/UpdateMonitorSignal",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentCTLServiceServer).UpdateMonitorSignal(ctx, req.(*AgentActiveMonitorSignal))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AgentCTLService_UpdateMonitorVideo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AgentActiveMonitorVideo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AgentCTLServiceServer).UpdateMonitorVideo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.AgentCTLService/UpdateMonitorVideo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AgentCTLServiceServer).UpdateMonitorVideo(ctx, req.(*AgentActiveMonitorVideo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AgentCTLService_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AgentDelete)
 	if err := dec(in); err != nil {
@@ -1083,6 +1793,26 @@ var _AgentCTLService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _AgentCTLService_Update_Handler,
+		},
+		{
+			MethodName: "UpdateStatus",
+			Handler:    _AgentCTLService_UpdateStatus_Handler,
+		},
+		{
+			MethodName: "UpdateRunthread",
+			Handler:    _AgentCTLService_UpdateRunthread_Handler,
+		},
+		{
+			MethodName: "UpdateActiveMonitor",
+			Handler:    _AgentCTLService_UpdateActiveMonitor_Handler,
+		},
+		{
+			MethodName: "UpdateMonitorSignal",
+			Handler:    _AgentCTLService_UpdateMonitorSignal_Handler,
+		},
+		{
+			MethodName: "UpdateMonitorVideo",
+			Handler:    _AgentCTLService_UpdateMonitorVideo_Handler,
 		},
 		{
 			MethodName: "Delete",

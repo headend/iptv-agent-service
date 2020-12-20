@@ -3,8 +3,8 @@ package agent_services
 import (
 	"context"
 	"fmt"
-	agentpb "github.com/headend/iptv-agent-service/proto"
 	"github.com/headend/iptv-agent-service/model"
+	agentpb "github.com/headend/iptv-agent-service/proto"
 	"github.com/jinzhu/gorm"
 	"google.golang.org/grpc/status"
 	"log"
@@ -180,36 +180,182 @@ func (c *agentServer) Update(ctx context.Context, in *agentpb.AgentRequest) (*ag
 
 func (c *agentServer) Delete(ctx context.Context, in *agentpb.AgentDelete) (*agentpb.AgentResponse, error) {
 	var agentModel model.Agent
-	var err error
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
+	if notExist {
+		return response, err3
+	}
 
-	if in.Id != 0 {
-		err = c.DB.Db.Where("id = ?", in.Id).First(&agentModel).Error
+	err2 := c.DB.Db.Delete(&agentModel).GetErrors()
+	var res []*agentpb.Agent
+	tmp := ConvertModelToProtoType(&agentModel)
+	res = append(res, &tmp)
+	if len(err2) == 0 {
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_SUCCESS, Agents: res}, nil
 	} else {
-		err = c.DB.Db.Where("ip_control = ?", in.IpControl).First(&agentModel).Error
+		log.Print(err2)
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
+	}
+}
+
+type IdentifyAgent struct {
+	AgentID int64
+	AgentControlIP string
+	Location string
+}
+
+func CheckAgentExists(in IdentifyAgent, c *agentServer, agentModel model.Agent) (*agentpb.AgentResponse, error, bool) {
+	var err error
+	if in.AgentID != 0 {
+		err = c.DB.Db.Where("id = ?", in.AgentID).First(&agentModel).Error
+	} else {
+		if in.AgentControlIP != "" {
+			err = c.DB.Db.Where("ip_control = ?", in.AgentControlIP).First(&agentModel).Error
+		} else {
+			if in.Location != "" {
+				err = c.DB.Db.Where("location = ?", in.Location).Find(&agentModel).Error
+			} else {
+				return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(400, "Invalid data"), true
+			}
+		}
 	}
 	if err != nil {
 		// Return not found if DB response notfound err
 		if gorm.IsRecordNotFoundError(err) {
-			return &agentpb.AgentResponse{Status:agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found"), true
 		}
 		// Return err
-		return &agentpb.AgentResponse{Status:agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error"), true
 	}
 	// Return not found if can not found agent
 	if agentModel == (model.Agent{}) {
-		return &agentpb.AgentResponse{Status:agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found"), true
 	}
-	err2 := c.DB.Db.Delete(&agentModel).GetErrors()
-	var res []* agentpb.Agent
-	tmp := ConvertModelToProtoType(&agentModel)
-	res = append(res, &tmp)
-	if len(err2) == 0 {
-		return &agentpb.AgentResponse{Status:agentpb.AgentResponseStatus_SUCCESS, Agents:res}, nil
-	} else {
-		log.Print(err2)
-		return &agentpb.AgentResponse{Status:agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
-	}
+	return nil, nil, false
 }
+
+
+//*
+// Update Agent status
+func (c *agentServer) UpdateStatus(ctx context.Context, in *agentpb.AgentUpdateStatus) (*agentpb.AgentResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
+	if notExist {
+		return response, err3
+	}
+	if in.Status != agentModel.Status {
+		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+			Status: in.Status,
+		}).Error
+		if err != nil {
+			return nil, err
+		}
+	}
+	return nil, nil
+}
+//*
+// Update RunThread
+func (c *agentServer) UpdateRunthread(ctx context.Context, in *agentpb.AgentUpdateMonitorRunThread) (*agentpb.AgentResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
+	if notExist {
+		return response, err3
+	}
+	if in.RunThread != agentModel.Run_Thread {
+		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+			Run_Thread: in.RunThread,
+		}).Error
+		if err != nil {
+			return nil, err
+		}
+	}
+	return nil, nil
+}
+//*
+// Active monitor
+func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.AgentActiveMonitor) (*agentpb.AgentResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
+	if notExist {
+		return response, err3
+	}
+	if in.IsMonitor != agentModel.IsMonitor {
+		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+			IsMonitor: in.IsMonitor,
+		}).Error
+		if err != nil {
+			return nil, err
+		}
+	}
+	return nil, nil
+}
+//*
+// Active monitor
+func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.AgentActiveMonitorSignal) (*agentpb.AgentResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
+	if notExist {
+		return response, err3
+	}
+	if in.SignalMonitor != agentModel.Signal_Monitor {
+		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+			Signal_Monitor: in.SignalMonitor,
+		}).Error
+		if err != nil {
+			return nil, err
+		}
+	}
+	return nil, nil
+}
+//*
+// Active monitor video
+func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentActiveMonitorVideo) (*agentpb.AgentResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
+	if notExist {
+		return response, err3
+	}
+	if in.VideoMonitor != agentModel.Video_Monitor {
+		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+			Video_Monitor: in.VideoMonitor,
+		}).Error
+		if err != nil {
+			return nil, err
+		}
+	}
+	return nil, nil
+}
+
+
 
 func ConvertModelToProtoType(tmp *model.Agent) agentpb.Agent {
 	agent := agentpb.Agent{
