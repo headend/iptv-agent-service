@@ -250,17 +250,27 @@ func (c *agentServer) UpdateStatus(ctx context.Context, in *agentpb.AgentUpdateS
 	}
 	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
 	if notExist {
+		log.Println(err3)
 		return response, err3
 	}
 	if in.Status != agentModel.Status {
+		log.Println("Update status")
 		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
 			Status: in.Status,
 		}).Error
 		if err != nil {
-			return nil, err
+			log.Println(err)
+			return &agentpb.AgentResponse{
+				Status: agentpb.AgentResponseStatus_FAIL,
+				Agents: nil,
+			}, err
 		}
+		log.Println("update status Done")
 	}
-	return nil, nil
+	return &agentpb.AgentResponse{
+		Status: agentpb.AgentResponseStatus_FAIL,
+		Agents: nil,
+	}, nil
 }
 //*
 // Update RunThread
@@ -280,10 +290,16 @@ func (c *agentServer) UpdateRunthread(ctx context.Context, in *agentpb.AgentUpda
 			Run_Thread: in.RunThread,
 		}).Error
 		if err != nil {
-			return nil, err
+			return &agentpb.AgentResponse{
+				Status: agentpb.AgentResponseStatus_FAIL,
+				Agents: nil,
+			}, err
 		}
 	}
-	return nil, nil
+	return &agentpb.AgentResponse{
+		Status: agentpb.AgentResponseStatus_FAIL,
+		Agents: nil,
+	}, nil
 }
 //*
 // Active monitor
@@ -303,10 +319,16 @@ func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.Agent
 			IsMonitor: in.IsMonitor,
 		}).Error
 		if err != nil {
-			return nil, err
+			return &agentpb.AgentResponse{
+				Status: agentpb.AgentResponseStatus_FAIL,
+				Agents: nil,
+			}, nil
 		}
 	}
-	return nil, nil
+	return &agentpb.AgentResponse{
+		Status: agentpb.AgentResponseStatus_FAIL,
+		Agents: nil,
+	}, nil
 }
 //*
 // Active monitor
@@ -326,10 +348,16 @@ func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.Agent
 			Signal_Monitor: in.SignalMonitor,
 		}).Error
 		if err != nil {
-			return nil, err
+			return &agentpb.AgentResponse{
+				Status: agentpb.AgentResponseStatus_FAIL,
+				Agents: nil,
+			}, err
 		}
 	}
-	return nil, nil
+	return &agentpb.AgentResponse{
+		Status: agentpb.AgentResponseStatus_FAIL,
+		Agents: nil,
+	}, nil
 }
 //*
 // Active monitor video
@@ -349,10 +377,16 @@ func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentA
 			Video_Monitor: in.VideoMonitor,
 		}).Error
 		if err != nil {
-			return nil, err
+			return &agentpb.AgentResponse{
+				Status: agentpb.AgentResponseStatus_FAIL,
+				Agents: nil,
+			}, err
 		}
 	}
-	return nil, nil
+	return &agentpb.AgentResponse{
+		Status: agentpb.AgentResponseStatus_FAIL,
+		Agents: nil,
+	}, nil
 }
 
 

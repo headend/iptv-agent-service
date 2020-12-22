@@ -7,7 +7,7 @@ func (Agent) TableName() string {
 }
 
 type Agent struct {
-	Agent_id			int64 `gorm:"column:agent_id;AUTO_INCREMENT;primary_key"`
+	Agent_id			int64 `gorm:"column:id;AUTO_INCREMENT;primary_key"`
 	Ip_Control			string `gorm:"column:ip_control;type:char(15);unique_index:ipcontrol;not null"`
 	Ip_Receive_Multicast	string `gorm:"column:ip_receive_multicast;type:char(15)"`
 	Cpu					int64 `gorm:"column:cpu;type:number;default:null"`

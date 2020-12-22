@@ -45,6 +45,8 @@ github.com/headend/share-module v0.0.0-20201219162529-65f396932ca9 h1:He3sebyGao
 github.com/headend/share-module v0.0.0-20201219162529-65f396932ca9/go.mod h1:dG5PsEogW+v822OBCrAW4ilBqZ9EFtEZ1IZYqEI7Op4=
 github.com/headend/share-module v0.0.0-20201220134804-3563da216f2b h1:Srp7hKH3XrmQxjLxwvEfvTZJ7ybYWqUWmzMjheIYNQo=
 github.com/headend/share-module v0.0.0-20201220134804-3563da216f2b/go.mod h1:EYbaYXd4gflR+isQ+/4Z0J8zkNeaYJKpOMdQCt1RV8Y=
+github.com/headend/share-module v0.0.0-20201222091717-a833b8b42d9c h1:ZZbW/MpEJcwOFg7vnfxrA5qL6ASaI1oLh8mca79SOv8=
+github.com/headend/share-module v0.0.0-20201222091717-a833b8b42d9c/go.mod h1:vXgMTKM0WciE8f+tARY7tewhwzotSSYM/6AzqYkna3Q=
 github.com/jinzhu/gorm v1.9.16 h1:+IyIjPEABKRpsu/F8OvDPy9fyQlgsg2luMV2ZIH5i5o=
 github.com/jinzhu/gorm v1.9.16/go.mod h1:G3LB3wezTOWM2ITLzPxEXgSkOXAntiLHS7UdBefADcs=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
@@ -88,6 +90,8 @@ golang.org/x/sys v0.0.0-20201214210602-f9fddec55a1e h1:AyodaIpKjppX+cBfTASF2E1US
 golang.org/x/sys v0.0.0-20201214210602-f9fddec55a1e/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20201218084310-7d0127a74742 h1:+CBz4km/0KPU3RGTwARGh/noP3bEwtHcq+0YcBQM2JQ=
 golang.org/x/sys v0.0.0-20201218084310-7d0127a74742/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20201221093633-bc327ba9c2f0 h1:n+DPcgTwkgWzIFpLmoimYR2K2b0Ga5+Os4kayIN0vGo=
+golang.org/x/sys v0.0.0-20201221093633-bc327ba9c2f0/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
 golang.org/x/text v0.3.0 h1:g61tztE5qeGQ89tm6NTjjM9VPIm088od1l6aSorWRWg=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=

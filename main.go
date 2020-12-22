@@ -8,6 +8,6 @@ import (
 
 func main()  {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
-	log.Println("Agent control service")
+	log.Println("Agent service")
 	agent_services.StartServer()
 }
