@@ -31,27 +31,19 @@ func (c *agentServer) Gets(ctx context.Context, in *agentpb.AgentGetAll) (*agent
 }
 
 func (c *agentServer) Get(ctx context.Context, in *agentpb.AgentFilter) (*agentpb.AgentResponse, error) {
-	var agents []*model.Agent
-	mcase := matchFilterCase(in)
-	var err error
-	switch mcase {
-	case 1:
-		err = c.DB.Db.Where("id = ?", in.Id).Find(&agents).Error
-	case 2:
-		err = c.DB.Db.Where("ip_control = ?", in.IpControl).Find(&agents).Error
-	case 3:
-		err = c.DB.Db.Where("location = ?", in.Location).Find(&agents).Error
-	default:
-		log.Printf("Exeption on %#v", in)
-		return nil,nil
+	filterSupport := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       in.Location,
 	}
+	agents, err := fillterAgent(filterSupport, c)
 
 	if err != nil {
 		return nil, err
 	}
-	var res [] *agentpb.Agent
+	var res []*agentpb.Agent
 
-	for _,tmp := range agents {
+	for _, tmp := range agents {
 		agent := ConvertModelToProtoType(tmp)
 		res = append(res, &agent)
 	}
@@ -60,6 +52,23 @@ func (c *agentServer) Get(ctx context.Context, in *agentpb.AgentFilter) (*agentp
 		Agents: res,
 	}
 	return &result, nil
+}
+
+func fillterAgent(filterSupport IdentifyAgent, c *agentServer) ([]*model.Agent, error) {
+	var agents []*model.Agent
+	mcase := matchFilterCase(filterSupport)
+	var err error
+	switch mcase {
+	case 1:
+		err = c.DB.Db.Where("id = ?", filterSupport.AgentID).Find(&agents).Error
+	case 2:
+		err = c.DB.Db.Where("ip_control = ?", filterSupport.AgentControlIP).Find(&agents).Error
+	case 3:
+		err = c.DB.Db.Where("location = ?", filterSupport.Location).Find(&agents).Error
+	default:
+		err = fmt.Errorf("Filter not support")
+	}
+	return agents, err
 }
 
 func (c *agentServer) Add(ctx context.Context, in *agentpb.AgentRequest) (*agentpb.AgentResponse, error) {
@@ -179,15 +188,21 @@ func (c *agentServer) Update(ctx context.Context, in *agentpb.AgentRequest) (*ag
 }
 
 func (c *agentServer) Delete(ctx context.Context, in *agentpb.AgentDelete) (*agentpb.AgentResponse, error) {
-	var agentModel model.Agent
-	indentifyAgent := IdentifyAgent{
+	filterSupport := IdentifyAgent{
 		AgentID:        in.Id,
 		AgentControlIP: in.IpControl,
-		Location:       "",
 	}
-	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
-	if notExist {
-		return response, err3
+	var agentModel model.Agent
+	err, agentModel := CheckAgentExists(filterSupport, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 
 	err2 := c.DB.Db.Delete(&agentModel).GetErrors()
@@ -208,34 +223,31 @@ type IdentifyAgent struct {
 	Location string
 }
 
-func CheckAgentExists(in IdentifyAgent, c *agentServer, agentModel model.Agent) (*agentpb.AgentResponse, error, bool) {
-	var err error
-	if in.AgentID != 0 {
-		err = c.DB.Db.Where("id = ?", in.AgentID).First(&agentModel).Error
-	} else {
-		if in.AgentControlIP != "" {
-			err = c.DB.Db.Where("ip_control = ?", in.AgentControlIP).First(&agentModel).Error
-		} else {
-			if in.Location != "" {
-				err = c.DB.Db.Where("location = ?", in.Location).Find(&agentModel).Error
-			} else {
-				return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(400, "Invalid data"), true
-			}
-		}
+func CheckAgentExists(in IdentifyAgent, c *agentServer) (err error, agent model.Agent) {
+	filterSupport := IdentifyAgent{
+		AgentID:        in.AgentID,
+		AgentControlIP: in.AgentControlIP,
+		Location:       in.Location,
 	}
-	if err != nil {
+	var result model.Agent
+	agents, err2 := fillterAgent(filterSupport, c)
+	if err2 != nil {
+		return err2, result
 		// Return not found if DB response notfound err
-		if gorm.IsRecordNotFoundError(err) {
-			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found"), true
-		}
+		//if gorm.IsRecordNotFoundError(err2) {
+			//return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found"), true
+
+		//}
 		// Return err
-		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error"), true
+		//return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error"), true
 	}
 	// Return not found if can not found agent
-	if agentModel == (model.Agent{}) {
-		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found"), true
+	if len(agents) == 0 {
+		//return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found"), true
+		return fmt.Errorf("Not found"), result
 	}
-	return nil, nil, false
+	result = *agents[0]
+	return nil, result
 }
 
 
@@ -248,16 +260,25 @@ func (c *agentServer) UpdateStatus(ctx context.Context, in *agentpb.AgentUpdateS
 		AgentControlIP: in.IpControl,
 		Location:       "",
 	}
-	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
-	if notExist {
-		log.Println(err3)
-		return response, err3
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.Status != agentModel.Status {
 		log.Println("Update status")
-		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
-			Status: in.Status,
-		}).Error
+		//log.Printf("%#v", agentModel)
+		err := c.DB.Db.Model(agentModel).Updates(map[string]interface{}{"status": in.Status}).Error
+		//err := c.DB.Db.Save(&agentModel).Error
+		//err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+		//	Status: in.Status,
+		//}).Error
 		if err != nil {
 			log.Println(err)
 			return &agentpb.AgentResponse{
@@ -265,7 +286,7 @@ func (c *agentServer) UpdateStatus(ctx context.Context, in *agentpb.AgentUpdateS
 				Agents: nil,
 			}, err
 		}
-		log.Println("update status Done")
+		//log.Println("update status Done")
 	}
 	return &agentpb.AgentResponse{
 		Status: agentpb.AgentResponseStatus_FAIL,
@@ -281,9 +302,16 @@ func (c *agentServer) UpdateRunthread(ctx context.Context, in *agentpb.AgentUpda
 		AgentControlIP: in.IpControl,
 		Location:       "",
 	}
-	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
-	if notExist {
-		return response, err3
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.RunThread != agentModel.Run_Thread {
 		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
@@ -310,9 +338,16 @@ func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.Agent
 		AgentControlIP: in.IpControl,
 		Location:       "",
 	}
-	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
-	if notExist {
-		return response, err3
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.IsMonitor != agentModel.IsMonitor {
 		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
@@ -339,9 +374,16 @@ func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.Agent
 		AgentControlIP: in.IpControl,
 		Location:       "",
 	}
-	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
-	if notExist {
-		return response, err3
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.SignalMonitor != agentModel.Signal_Monitor {
 		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
@@ -368,9 +410,16 @@ func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentA
 		AgentControlIP: in.IpControl,
 		Location:       "",
 	}
-	response, err3, notExist := CheckAgentExists(indentifyAgent, c, agentModel)
-	if notExist {
-		return response, err3
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.VideoMonitor != agentModel.Video_Monitor {
 		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
@@ -412,12 +461,12 @@ func ConvertModelToProtoType(tmp *model.Agent) agentpb.Agent {
 	return agent
 }
 
-func matchFilterCase(in *agentpb.AgentFilter) (uint8) {
+func matchFilterCase(in IdentifyAgent) (uint8) {
 
-	if in.Id != 0 {
+	if in.AgentID != 0 {
 		return 1
 	}
-	if in.IpControl != "" {
+	if in.AgentControlIP != "" {
 		return 2
 	}
 	if in.Location != "" {
