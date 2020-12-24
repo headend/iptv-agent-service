@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/headend/iptv-agent-service/model"
 	agentpb "github.com/headend/iptv-agent-service/proto"
+	static_config "github.com/headend/share-module/configuration/static-config"
 	"github.com/jinzhu/gorm"
 	"google.golang.org/grpc/status"
 	"log"
@@ -438,6 +439,92 @@ func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentA
 	}, nil
 }
 
+func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.ProfileMonitorRequest) (*agentpb.ProfileMonitorResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.AgentId,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(404, "Not found")
+		}
+		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(500, "Internal server error")
+	}
+	// go get progile monitor by agent info
+
+	// Make where clause
+	var whereClause string
+	switch in.MonitorType {
+	case static_config.Signal:
+		whereClause = fmt.Sprintf("monitor.is_enable= %d AND monitor.agent_id=%d AND monitor.signal_monitor=%d",1, agentModel.Agent_id, 1)
+	case static_config.Video:
+		whereClause = fmt.Sprintf("monitor.is_enable= %d AND monitor.agent_id=%d AND monitor.video_monitor=%d",1, agentModel.Agent_id, 1)
+	default:
+		err = fmt.Errorf("Wait for support monitor type = %d", in.MonitorType)
+		log.Print(err)
+		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(415, err.Error())
+	}
+
+	// make query
+	rows, err := c.DB.Db.Table("monitor").Select(
+		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable").Joins("" +
+		"join profile on profile.id = monitor.profile_id").Joins(
+		"join multicast_ip on multicast_ip.id = profile.multicast_ip_id").Where(whereClause).Rows()
+	if err != nil {
+		log.Println(err)
+		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(500, "Internal server error")
+	}
+
+	var fetchErr error
+	var resulfResponse agentpb.ProfileMonitorResponse
+	var resulfData []*agentpb.ProfileMonitorElement
+	for rows.Next() {
+		var (
+			Id int64
+			AgentID		int64
+			StatusId	int64
+			ProdileId	int64
+			Ip	string
+			SignalMonitor bool
+			VideoMonitor	bool
+			StatusVideo		bool
+			IsEnable	bool
+		)
+		err := rows.Scan(&Id, &AgentID, &StatusId, &ProdileId, &Ip, &SignalMonitor, &VideoMonitor, &StatusVideo, &IsEnable)
+		if err != nil {
+			log.Println(err)
+			break
+		}
+		dataElement := agentpb.ProfileMonitorElement{
+			MonitorId:     Id,
+			AgentId:       AgentID,
+			StatusId:      StatusId,
+			IpControl:     "",
+			MulticastIp:   Ip,
+			SignalMonitor: SignalMonitor,
+			VideoMonitor:  VideoMonitor,
+			StatusVideo:   StatusVideo,
+			IsEnable:      IsEnable,
+		}
+		resulfData = append(resulfData, &dataElement)
+		log.Printf("data rows: %d, %d, %d, %d, %s, %b, %b, %b, %b", Id, AgentID, StatusId, ProdileId, Ip, SignalMonitor, VideoMonitor, StatusVideo, IsEnable)
+	}
+	if fetchErr != nil{
+		log.Print(fetchErr)
+		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(500, "Internal server error")
+	}
+	resulfResponse.Status = agentpb.AgentResponseStatus_SUCCESS
+	resulfResponse.Profiles = resulfData
+	resulfResponse.MonitorType = in.MonitorType
+	return &resulfResponse, nil
+}
 
 
 func ConvertModelToProtoType(tmp *model.Agent) agentpb.Agent {

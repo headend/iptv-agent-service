@@ -94,6 +94,37 @@ message AgentDelete {
     string ip_control = 2 [json_name = "ip_control"];
 }
 
+message ProfileMonitorRequest {
+    int64 agent_id = 1 [json_name = "agent_id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    int64 monitor_type = 3 [json_name = "monitor_type"];
+}
+
+message ProfileMonitorElement {
+    int64 monitor_id = 1 [json_name = "monitor_id"];
+    int64 agent_id = 2 [json_name = "agent_id"];
+    int64 status_id = 3 [json_name = "status_id"];
+    string ip_control = 4 [json_name = "ip_control"];
+    string multicast_ip = 5 [json_name = "multicast_ip"];
+    bool signal_monitor = 6 [json_name = "signal_monitor"];
+    bool video_monitor = 7 [json_name = "video_monitor"];
+    bool status_video = 8 [json_name = "status_video"];
+    bool is_enable = 9 [json_name = "is_enable"];
+}
+
+message ProfileMonitorResponse {
+    /**
+    * Status
+    */
+    AgentResponseStatus Status = 1 [json_name = "status"];
+    /**
+    * Slice of agent object
+    */
+    repeated ProfileMonitorElement profiles = 2 [json_name = "data"];
+    int64 monitor_type = 3 [json_name = "monitor_type"];
+}
+
+
 message AgentGetAll {
 }
 
@@ -113,7 +144,7 @@ enum AgentResponseStatus {
     SUCCESS = 1; /// Failed
 }
 
-service AgentCTLService {
+service AgentService {
     /**
     * Get All Agent
     */
@@ -170,6 +201,12 @@ service AgentCTLService {
     * Delete Agent
     */
     rpc Delete (AgentDelete) returns(AgentResponse){
+    }
+
+    /**
+    * Get profile monitor by agent
+    */
+    rpc GetProfileMonitor (ProfileMonitorRequest) returns (ProfileMonitorResponse){
     }
 }
 
