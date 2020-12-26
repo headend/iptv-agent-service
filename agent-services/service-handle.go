@@ -528,7 +528,7 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 	return &resulfResponse, nil
 }
 
-func (c *agentServer) UpdateMonitorStatus(ctx context.Context, in *agentpb.MonitorUpdateStatusRequest) (*agentpb.ProfileMonitorResponse, error)  {
+func (c *agentServer) MonitorUpdateStatus(ctx context.Context, in *agentpb.MonitorUpdateStatusRequest) (*agentpb.ProfileMonitorResponse, error)  {
 	// check monitor id
 	var monitors []*model.Monitor
 	if in.MonitorId == 0 {
