@@ -100,6 +100,15 @@ message ProfileMonitorRequest {
     int64 monitor_type = 3 [json_name = "monitor_type"];
 }
 
+message UpdateMonitorStatusRequest {
+    int64 monitor_id = 1 [json_name = "monitor_id"];
+    int64 monitor_type = 2 [json_name = "monitor_type"];
+    int64 new_status = 3 [json_name = "new_status"];
+    bool new_signal_status = 4 [json_name = "new_signal_status"];
+    bool new_video_status = 5 [json_name = "new_video_status"];
+    bool new_audio_status = 6 [json_name = "new_audio_status"];
+}
+
 message ProfileMonitorElement {
     int64 monitor_id = 1 [json_name = "monitor_id"];
     int64 profile_id = 2 [json_name = "profile_id"];
@@ -202,6 +211,12 @@ service AgentService {
     * Delete Agent
     */
     rpc Delete (AgentDelete) returns(AgentResponse){
+    }
+
+    /**
+    * Update Agent status
+    */
+    rpc UpdateMonitorStatus (UpdateMonitorStatusRequest) returns (ProfileMonitorResponse) {
     }
 
     /**
