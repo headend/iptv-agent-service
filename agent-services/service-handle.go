@@ -333,6 +333,7 @@ func (c *agentServer) UpdateRunthread(ctx context.Context, in *agentpb.AgentUpda
 //*
 // Active monitor
 func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.AgentActiveMonitor) (*agentpb.AgentResponse, error) {
+	log.Println("Update is_monitor")
 	var agentModel model.Agent
 	indentifyAgent := IdentifyAgent{
 		AgentID:        in.Id,
@@ -351,9 +352,8 @@ func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.Agent
 		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.IsMonitor != agentModel.IsMonitor {
-		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
-			IsMonitor: in.IsMonitor,
-		}).Error
+		log.Println("Do update")
+		err := c.DB.Db.Model(&agentModel).Updates(map[string]interface{}{"is_monitor": in.IsMonitor}).Error
 		if err != nil {
 			return &agentpb.AgentResponse{
 				Status: agentpb.AgentResponseStatus_FAIL,
@@ -369,6 +369,7 @@ func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.Agent
 //*
 // Active monitor
 func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.AgentActiveMonitorSignal) (*agentpb.AgentResponse, error) {
+	log.Println("Update monitor signal")
 	var agentModel model.Agent
 	indentifyAgent := IdentifyAgent{
 		AgentID:        in.Id,
@@ -387,9 +388,8 @@ func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.Agent
 		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.SignalMonitor != agentModel.Signal_Monitor {
-		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
-			Signal_Monitor: in.SignalMonitor,
-		}).Error
+		log.Println("Do update ")
+		err := c.DB.Db.Model(&agentModel).Updates(map[string]interface{}{"signal_monitor": in.SignalMonitor}).Error
 		if err != nil {
 			return &agentpb.AgentResponse{
 				Status: agentpb.AgentResponseStatus_FAIL,
@@ -405,6 +405,7 @@ func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.Agent
 //*
 // Active monitor video
 func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentActiveMonitorVideo) (*agentpb.AgentResponse, error) {
+	log.Println("Update monitor video")
 	var agentModel model.Agent
 	indentifyAgent := IdentifyAgent{
 		AgentID:        in.Id,
@@ -423,9 +424,8 @@ func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentA
 		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
 	}
 	if in.VideoMonitor != agentModel.Video_Monitor {
-		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
-			Video_Monitor: in.VideoMonitor,
-		}).Error
+		log.Println("Do update ")
+		err := c.DB.Db.Model(&agentModel).Updates(map[string]interface{}{"video_monitor": in.VideoMonitor}).Error
 		if err != nil {
 			return &agentpb.AgentResponse{
 				Status: agentpb.AgentResponseStatus_FAIL,
@@ -504,6 +504,7 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 		}
 		dataElement := agentpb.ProfileMonitorElement{
 			MonitorId:     Id,
+			ProfileId:		ProdileId,
 			AgentId:       AgentID,
 			StatusId:      StatusId,
 			IpControl:     "",
@@ -514,7 +515,8 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 			IsEnable:      IsEnable,
 		}
 		resulfData = append(resulfData, &dataElement)
-		log.Printf("data rows: %d, %d, %d, %d, %s, %b, %b, %b, %b", Id, AgentID, StatusId, ProdileId, Ip, SignalMonitor, VideoMonitor, StatusVideo, IsEnable)
+		log.Printf("monitor: %#v", dataElement)
+		//log.Printf("data rows: %d, %d, %d, %d, %s, %b, %b, %b, %b", Id, AgentID, StatusId, ProdileId, Ip, SignalMonitor, VideoMonitor, StatusVideo, IsEnable)
 	}
 	if fetchErr != nil{
 		log.Print(fetchErr)
