@@ -100,7 +100,7 @@ message ProfileMonitorRequest {
     int64 monitor_type = 3 [json_name = "monitor_type"];
 }
 
-message UpdateMonitorStatusRequest {
+message MonitorUpdateStatusRequest {
     int64 monitor_id = 1 [json_name = "monitor_id"];
     int64 monitor_type = 2 [json_name = "monitor_type"];
     int64 new_status = 3 [json_name = "new_status"];
@@ -216,7 +216,7 @@ service AgentService {
     /**
     * Update Agent status
     */
-    rpc UpdateMonitorStatus (UpdateMonitorStatusRequest) returns (ProfileMonitorResponse) {
+    rpc MonitorUpdateStatus (MonitorUpdateStatusRequest) returns (ProfileMonitorResponse) {
     }
 
     /**

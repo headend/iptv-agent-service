@@ -946,7 +946,7 @@ func (x *ProfileMonitorRequest) GetMonitorType() int64 {
 	return 0
 }
 
-type UpdateMonitorStatusRequest struct {
+type MonitorUpdateStatusRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -959,8 +959,8 @@ type UpdateMonitorStatusRequest struct {
 	NewAudioStatus  bool  `protobuf:"varint,6,opt,name=new_audio_status,proto3" json:"new_audio_status,omitempty"`
 }
 
-func (x *UpdateMonitorStatusRequest) Reset() {
-	*x = UpdateMonitorStatusRequest{}
+func (x *MonitorUpdateStatusRequest) Reset() {
+	*x = MonitorUpdateStatusRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_agent_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -968,13 +968,13 @@ func (x *UpdateMonitorStatusRequest) Reset() {
 	}
 }
 
-func (x *UpdateMonitorStatusRequest) String() string {
+func (x *MonitorUpdateStatusRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateMonitorStatusRequest) ProtoMessage() {}
+func (*MonitorUpdateStatusRequest) ProtoMessage() {}
 
-func (x *UpdateMonitorStatusRequest) ProtoReflect() protoreflect.Message {
+func (x *MonitorUpdateStatusRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_agent_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -986,47 +986,47 @@ func (x *UpdateMonitorStatusRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UpdateMonitorStatusRequest.ProtoReflect.Descriptor instead.
-func (*UpdateMonitorStatusRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use MonitorUpdateStatusRequest.ProtoReflect.Descriptor instead.
+func (*MonitorUpdateStatusRequest) Descriptor() ([]byte, []int) {
 	return file_agent_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *UpdateMonitorStatusRequest) GetMonitorId() int64 {
+func (x *MonitorUpdateStatusRequest) GetMonitorId() int64 {
 	if x != nil {
 		return x.MonitorId
 	}
 	return 0
 }
 
-func (x *UpdateMonitorStatusRequest) GetMonitorType() int64 {
+func (x *MonitorUpdateStatusRequest) GetMonitorType() int64 {
 	if x != nil {
 		return x.MonitorType
 	}
 	return 0
 }
 
-func (x *UpdateMonitorStatusRequest) GetNewStatus() int64 {
+func (x *MonitorUpdateStatusRequest) GetNewStatus() int64 {
 	if x != nil {
 		return x.NewStatus
 	}
 	return 0
 }
 
-func (x *UpdateMonitorStatusRequest) GetNewSignalStatus() bool {
+func (x *MonitorUpdateStatusRequest) GetNewSignalStatus() bool {
 	if x != nil {
 		return x.NewSignalStatus
 	}
 	return false
 }
 
-func (x *UpdateMonitorStatusRequest) GetNewVideoStatus() bool {
+func (x *MonitorUpdateStatusRequest) GetNewVideoStatus() bool {
 	if x != nil {
 		return x.NewVideoStatus
 	}
 	return false
 }
 
-func (x *UpdateMonitorStatusRequest) GetNewAudioStatus() bool {
+func (x *MonitorUpdateStatusRequest) GetNewAudioStatus() bool {
 	if x != nil {
 		return x.NewAudioStatus
 	}
@@ -1434,7 +1434,7 @@ var file_agent_proto_rawDesc = []byte{
 	0x5f, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x12, 0x22, 0x0a, 0x0c, 0x6d, 0x6f, 0x6e, 0x69,
 	0x74, 0x6f, 0x72, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c,
 	0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x22, 0x86, 0x02, 0x0a,
-	0x1a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x53, 0x74,
+	0x1a, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x74,
 	0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x6d,
 	0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
 	0x0a, 0x6d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x5f, 0x69, 0x64, 0x12, 0x22, 0x0a, 0x0c, 0x6d,
@@ -1535,9 +1535,9 @@ var file_agent_proto_rawDesc = []byte{
 	0x74, 0x65, 0x12, 0x12, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41, 0x67, 0x65, 0x6e, 0x74,
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x1a, 0x14, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x41,
 	0x67, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x59,
-	0x0a, 0x13, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x53,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x55, 0x70,
-	0x64, 0x61, 0x74, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x53, 0x74, 0x61, 0x74, 0x75,
+	0x0a, 0x13, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2e, 0x4d, 0x6f,
+	0x6e, 0x69, 0x74, 0x6f, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75,
 	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x2e, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x4d, 0x6f, 0x6e, 0x69, 0x74, 0x6f, 0x72, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x52, 0x0a, 0x11, 0x47, 0x65, 0x74,
@@ -1579,7 +1579,7 @@ var file_agent_proto_goTypes = []interface{}{
 	(*AgentUpdateMonitorRunThread)(nil), // 9: proto.AgentUpdateMonitorRunThread
 	(*AgentDelete)(nil),                 // 10: proto.AgentDelete
 	(*ProfileMonitorRequest)(nil),       // 11: proto.ProfileMonitorRequest
-	(*UpdateMonitorStatusRequest)(nil),  // 12: proto.UpdateMonitorStatusRequest
+	(*MonitorUpdateStatusRequest)(nil),  // 12: proto.MonitorUpdateStatusRequest
 	(*ProfileMonitorElement)(nil),       // 13: proto.ProfileMonitorElement
 	(*ProfileMonitorResponse)(nil),      // 14: proto.ProfileMonitorResponse
 	(*AgentGetAll)(nil),                 // 15: proto.AgentGetAll
@@ -1600,7 +1600,7 @@ var file_agent_proto_depIdxs = []int32{
 	7,  // 11: proto.AgentService.UpdateMonitorSignal:input_type -> proto.AgentActiveMonitorSignal
 	6,  // 12: proto.AgentService.UpdateMonitorVideo:input_type -> proto.AgentActiveMonitorVideo
 	10, // 13: proto.AgentService.Delete:input_type -> proto.AgentDelete
-	12, // 14: proto.AgentService.UpdateMonitorStatus:input_type -> proto.UpdateMonitorStatusRequest
+	12, // 14: proto.AgentService.MonitorUpdateStatus:input_type -> proto.MonitorUpdateStatusRequest
 	11, // 15: proto.AgentService.GetProfileMonitor:input_type -> proto.ProfileMonitorRequest
 	16, // 16: proto.AgentService.Gets:output_type -> proto.AgentResponse
 	16, // 17: proto.AgentService.Get:output_type -> proto.AgentResponse
@@ -1612,7 +1612,7 @@ var file_agent_proto_depIdxs = []int32{
 	16, // 23: proto.AgentService.UpdateMonitorSignal:output_type -> proto.AgentResponse
 	16, // 24: proto.AgentService.UpdateMonitorVideo:output_type -> proto.AgentResponse
 	16, // 25: proto.AgentService.Delete:output_type -> proto.AgentResponse
-	14, // 26: proto.AgentService.UpdateMonitorStatus:output_type -> proto.ProfileMonitorResponse
+	14, // 26: proto.AgentService.MonitorUpdateStatus:output_type -> proto.ProfileMonitorResponse
 	14, // 27: proto.AgentService.GetProfileMonitor:output_type -> proto.ProfileMonitorResponse
 	16, // [16:28] is the sub-list for method output_type
 	4,  // [4:16] is the sub-list for method input_type
@@ -1760,7 +1760,7 @@ func file_agent_proto_init() {
 			}
 		}
 		file_agent_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateMonitorStatusRequest); i {
+			switch v := v.(*MonitorUpdateStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1885,7 +1885,7 @@ type AgentServiceClient interface {
 	Delete(ctx context.Context, in *AgentDelete, opts ...grpc.CallOption) (*AgentResponse, error)
 	//*
 	// Update Agent status
-	UpdateMonitorStatus(ctx context.Context, in *UpdateMonitorStatusRequest, opts ...grpc.CallOption) (*ProfileMonitorResponse, error)
+	MonitorUpdateStatus(ctx context.Context, in *MonitorUpdateStatusRequest, opts ...grpc.CallOption) (*ProfileMonitorResponse, error)
 	//*
 	// Get profile monitor by agent
 	GetProfileMonitor(ctx context.Context, in *ProfileMonitorRequest, opts ...grpc.CallOption) (*ProfileMonitorResponse, error)
@@ -1989,9 +1989,9 @@ func (c *agentServiceClient) Delete(ctx context.Context, in *AgentDelete, opts .
 	return out, nil
 }
 
-func (c *agentServiceClient) UpdateMonitorStatus(ctx context.Context, in *UpdateMonitorStatusRequest, opts ...grpc.CallOption) (*ProfileMonitorResponse, error) {
+func (c *agentServiceClient) MonitorUpdateStatus(ctx context.Context, in *MonitorUpdateStatusRequest, opts ...grpc.CallOption) (*ProfileMonitorResponse, error) {
 	out := new(ProfileMonitorResponse)
-	err := c.cc.Invoke(ctx, "/proto.AgentService/UpdateMonitorStatus", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/proto.AgentService/MonitorUpdateStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2041,7 +2041,7 @@ type AgentServiceServer interface {
 	Delete(context.Context, *AgentDelete) (*AgentResponse, error)
 	//*
 	// Update Agent status
-	UpdateMonitorStatus(context.Context, *UpdateMonitorStatusRequest) (*ProfileMonitorResponse, error)
+	MonitorUpdateStatus(context.Context, *MonitorUpdateStatusRequest) (*ProfileMonitorResponse, error)
 	//*
 	// Get profile monitor by agent
 	GetProfileMonitor(context.Context, *ProfileMonitorRequest) (*ProfileMonitorResponse, error)
@@ -2081,8 +2081,8 @@ func (*UnimplementedAgentServiceServer) UpdateMonitorVideo(context.Context, *Age
 func (*UnimplementedAgentServiceServer) Delete(context.Context, *AgentDelete) (*AgentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (*UnimplementedAgentServiceServer) UpdateMonitorStatus(context.Context, *UpdateMonitorStatusRequest) (*ProfileMonitorResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMonitorStatus not implemented")
+func (*UnimplementedAgentServiceServer) MonitorUpdateStatus(context.Context, *MonitorUpdateStatusRequest) (*ProfileMonitorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MonitorUpdateStatus not implemented")
 }
 func (*UnimplementedAgentServiceServer) GetProfileMonitor(context.Context, *ProfileMonitorRequest) (*ProfileMonitorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProfileMonitor not implemented")
@@ -2272,20 +2272,20 @@ func _AgentService_Delete_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AgentService_UpdateMonitorStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMonitorStatusRequest)
+func _AgentService_MonitorUpdateStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MonitorUpdateStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AgentServiceServer).UpdateMonitorStatus(ctx, in)
+		return srv.(AgentServiceServer).MonitorUpdateStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/proto.AgentService/UpdateMonitorStatus",
+		FullMethod: "/proto.AgentService/MonitorUpdateStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AgentServiceServer).UpdateMonitorStatus(ctx, req.(*UpdateMonitorStatusRequest))
+		return srv.(AgentServiceServer).MonitorUpdateStatus(ctx, req.(*MonitorUpdateStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2353,8 +2353,8 @@ var _AgentService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _AgentService_Delete_Handler,
 		},
 		{
-			MethodName: "UpdateMonitorStatus",
-			Handler:    _AgentService_UpdateMonitorStatus_Handler,
+			MethodName: "MonitorUpdateStatus",
+			Handler:    _AgentService_MonitorUpdateStatus_Handler,
 		},
 		{
 			MethodName: "GetProfileMonitor",
