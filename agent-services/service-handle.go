@@ -515,7 +515,7 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 			IsEnable:      IsEnable,
 		}
 		resulfData = append(resulfData, &dataElement)
-		log.Printf("monitor: %#v", dataElement)
+		//log.Printf("monitor: %#v", dataElement)
 		//log.Printf("data rows: %d, %d, %d, %d, %s, %b, %b, %b, %b", Id, AgentID, StatusId, ProdileId, Ip, SignalMonitor, VideoMonitor, StatusVideo, IsEnable)
 	}
 	if fetchErr != nil{
@@ -550,29 +550,29 @@ func (c *agentServer) MonitorUpdateStatus(ctx context.Context, in *agentpb.Monit
 	case static_config.Signal:
 		// update signal status
 		if in.NewStatus != 1 {
-			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_signal": false}).Error
+			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_signal": false, "status_id": in.NewStatus}).Error
 		} else {
-			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_signal": true}).Error
+			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_signal": true, "status_id": in.NewStatus}).Error
 		}
 	case static_config.Video:
 		// update video status
 		if in.NewStatus != 1 {
-			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_video": false}).Error
+			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_video": false, "status_id": in.NewStatus}).Error
 		} else {
-			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_video": true}).Error
+			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_video": true, "status_id": in.NewStatus}).Error
 		}
 	case static_config.Audio:
 		// update video status
 		if in.NewStatus != 1 {
-			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_audio": false}).Error
+			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_audio": false, "status_id": in.NewStatus}).Error
 		} else {
-			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_audio": true}).Error
+			_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status_audio": true, "status_id": in.NewStatus}).Error
 		}
 	default:
 		log.Printf("Not support monitor type: %d", in.MonitorType)
 	}
 	// update status
-	_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status": in.NewStatus}).Error
+	//_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status": in.NewStatus}).Error
 	return &agentpb.ProfileMonitorResponse{
 		Status:      agentpb.AgentResponseStatus_SUCCESS,
 		Profiles:    nil,
