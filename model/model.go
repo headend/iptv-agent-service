@@ -58,7 +58,7 @@ type Profile struct {
 	Date_create			time.Time `gorm:"column:date_create;type:datetime;default:null"`
 	Date_update			time.Time `gorm:"column:date_update;type:datetime;default:null"`
 	Is_original 		bool  `gorm:"column:is_original;default:false"`
-	Channel_id 			int64 `gorm:"column:channel_id;default:null"`
+	Channel_id 			Channel `gorm:"foreignkey:id;references:channel_id"`
 	Encoder_id  		int64 `gorm:"column:encoder_id ;default:null"`
 	Multicast_ip_id  	int64 `gorm:"column:multicast_ip_id ;default:null"`
 	Profile_quality_id  int64 `gorm:"column:profile_quality_id;default:not null"`
@@ -76,6 +76,18 @@ type MulticastIp struct {
 	Id  	int64 `gorm:"column:id;AUTO_INCREMENT;primary_key"`
 	Ip 		string `gorm:"column:ip;type:char(15);default:null;"`
 	Desc  	string `gorm:"column:desc;type:varchar(60);default:null"`
+}
+
+func (Channel) TableName() string {
+	return "channel"
+}
+
+type Channel struct {
+	Id  	int64 `gorm:"column:id;AUTO_INCREMENT;primary_key"`
+	Name 	string `gorm:"column:name;type:varchar(30);default:null;"`
+	Desc  	string `gorm:"column:desc;type:varchar(60);default:null"`
+	Date_create			time.Time `gorm:"column:date_create;type:datetime;default:null"`
+	Date_update			time.Time `gorm:"column:date_update;type:datetime;default:null"`
 }
 
 

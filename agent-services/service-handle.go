@@ -474,9 +474,10 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 
 	// make query
 	rows, err := c.DB.Db.Table("monitor").Select(
-		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable").Joins("" +
+		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable, channel.id, channel.name").Joins("" +
 		"join profile on profile.id = monitor.profile_id").Joins(
-		"join multicast_ip on multicast_ip.id = profile.multicast_ip_id").Where(whereClause).Rows()
+		"join multicast_ip on multicast_ip.id = profile.multicast_ip_id").Joins(
+		"join channel on channel.id = profile.channel_id").Where(whereClause).Rows()
 	if err != nil {
 		log.Println(err)
 		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(500, "Internal server error")
@@ -496,8 +497,10 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 			VideoMonitor	bool
 			StatusVideo		bool
 			IsEnable	bool
+			ChannelID	int64
+			ChannelName	string
 		)
-		err := rows.Scan(&Id, &AgentID, &StatusId, &ProdileId, &Ip, &SignalMonitor, &VideoMonitor, &StatusVideo, &IsEnable)
+		err := rows.Scan(&Id, &AgentID, &StatusId, &ProdileId, &Ip, &SignalMonitor, &VideoMonitor, &StatusVideo, &IsEnable, &ChannelID, &ChannelName)
 		if err != nil {
 			log.Println(err)
 			break
@@ -513,6 +516,8 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 			VideoMonitor:  VideoMonitor,
 			StatusVideo:   StatusVideo,
 			IsEnable:      IsEnable,
+			ChannelId: 		ChannelID,
+			ChannelName: 	ChannelName,
 		}
 		resulfData = append(resulfData, &dataElement)
 		//log.Printf("monitor: %#v", dataElement)
@@ -573,9 +578,66 @@ func (c *agentServer) MonitorUpdateStatus(ctx context.Context, in *agentpb.Monit
 	}
 	// update status
 	//_ = c.DB.Db.Model(&thisMonitor).Updates(map[string]interface{}{"status": in.NewStatus}).Error
+	// get profile monitor
+	var whereClause string
+	whereClause = fmt.Sprintf("monitor.id= %d",thisMonitor.Id)
+	// make query
+	rows, err := c.DB.Db.Table("monitor").Select(
+		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable, channel.id, channel.name").Joins("" +
+		"join profile on profile.id = monitor.profile_id").Joins(
+		"join multicast_ip on multicast_ip.id = profile.multicast_ip_id").Joins(
+		"join channel on channel.id = profile.channel_id").Where(whereClause).Rows()
+	if err != nil {
+		log.Println(err)
+		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(500, "Internal server error")
+	}
+
+	var fetchErr error
+	var resulfData []*agentpb.ProfileMonitorElement
+	for rows.Next() {
+		var (
+			Id int64
+			AgentID		int64
+			StatusId	int64
+			ProdileId	int64
+			Ip	string
+			SignalMonitor bool
+			VideoMonitor	bool
+			StatusVideo		bool
+			IsEnable	bool
+			ChannelID	int64
+			ChannelName	string
+		)
+		err := rows.Scan(&Id, &AgentID, &StatusId, &ProdileId, &Ip, &SignalMonitor, &VideoMonitor, &StatusVideo, &IsEnable, &ChannelID, &ChannelName)
+		if err != nil {
+			log.Println(err)
+			break
+		}
+		dataElement := agentpb.ProfileMonitorElement{
+			MonitorId:     Id,
+			ProfileId:		ProdileId,
+			AgentId:       AgentID,
+			StatusId:      StatusId,
+			IpControl:     "",
+			MulticastIp:   Ip,
+			SignalMonitor: SignalMonitor,
+			VideoMonitor:  VideoMonitor,
+			StatusVideo:   StatusVideo,
+			IsEnable:      IsEnable,
+			ChannelId: 		ChannelID,
+			ChannelName: 	ChannelName,
+		}
+		resulfData = append(resulfData, &dataElement)
+		//log.Printf("monitor: %#v", dataElement)
+		//log.Printf("data rows: %d, %d, %d, %d, %s, %b, %b, %b, %b", Id, AgentID, StatusId, ProdileId, Ip, SignalMonitor, VideoMonitor, StatusVideo, IsEnable)
+	}
+	if fetchErr != nil{
+		log.Print(fetchErr)
+		return &agentpb.ProfileMonitorResponse{Status: agentpb.AgentResponseStatus_FAIL, MonitorType: in.MonitorType}, status.Error(500, "Internal server error")
+	}
 	return &agentpb.ProfileMonitorResponse{
 		Status:      agentpb.AgentResponseStatus_SUCCESS,
-		Profiles:    nil,
+		Profiles:    resulfData,
 		MonitorType: in.MonitorType,
 	}, nil
 }

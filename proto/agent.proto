@@ -120,6 +120,8 @@ message ProfileMonitorElement {
     bool video_monitor = 8 [json_name = "video_monitor"];
     bool status_video = 9 [json_name = "status_video"];
     bool is_enable = 10 [json_name = "is_enable"];
+    int64 channel_id = 11 [json_name = "channel_id"];
+    string channel_name = 12 [json_name = "channel_name"];
 }
 
 message ProfileMonitorResponse {
