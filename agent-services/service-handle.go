@@ -474,7 +474,7 @@ func (c *agentServer) GetProfileMonitor(ctx context.Context, in *agentpb.Profile
 
 	// make query
 	rows, err := c.DB.Db.Table("monitor").Select(
-		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable, channel.id, channel.name").Joins("" +
+		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable, channel.id, channel.name").Joins(
 		"join profile on profile.id = monitor.profile_id").Joins(
 		"join multicast_ip on multicast_ip.id = profile.multicast_ip_id").Joins(
 		"join channel on channel.id = profile.channel_id").Where(whereClause).Rows()
@@ -583,7 +583,7 @@ func (c *agentServer) MonitorUpdateStatus(ctx context.Context, in *agentpb.Monit
 	whereClause = fmt.Sprintf("monitor.id= %d",thisMonitor.Id)
 	// make query
 	rows, err := c.DB.Db.Table("monitor").Select(
-		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable, channel.id, channel.name").Joins("" +
+		"monitor.id, monitor.agent_id, monitor.status_id, profile.id as profile_id, multicast_ip.ip as ip, monitor.signal_monitor, monitor.video_monitor, monitor.status_video, monitor.is_enable, channel.id, channel.name").Joins(
 		"join profile on profile.id = monitor.profile_id").Joins(
 		"join multicast_ip on multicast_ip.id = profile.multicast_ip_id").Joins(
 		"join channel on channel.id = profile.channel_id").Where(whereClause).Rows()
