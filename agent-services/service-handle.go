@@ -294,7 +294,7 @@ func (c *agentServer) UpdateStatus(ctx context.Context, in *agentpb.AgentUpdateS
 		Agents: nil,
 	}, nil
 }
-//*
+//
 // Update RunThread
 func (c *agentServer) UpdateRunthread(ctx context.Context, in *agentpb.AgentUpdateMonitorRunThread) (*agentpb.AgentResponse, error) {
 	var agentModel model.Agent
@@ -642,6 +642,9 @@ func (c *agentServer) MonitorUpdateStatus(ctx context.Context, in *agentpb.Monit
 	}, nil
 }
 
+
+
+
 func ConvertModelToProtoType(tmp *model.Agent) agentpb.Agent {
 	agent := agentpb.Agent{
 		Id:                 tmp.Agent_id,
@@ -675,4 +678,40 @@ func matchFilterCase(in IdentifyAgent) (uint8) {
 		return 3
 	}
 	return 0
+}
+
+// Update version
+func (c *agentServer) UpdateVersion(ctx context.Context, in *agentpb.AgentUpdateVersion) (*agentpb.AgentResponse, error) {
+	var agentModel model.Agent
+	indentifyAgent := IdentifyAgent{
+		AgentID:        in.Id,
+		AgentControlIP: in.IpControl,
+		Location:       "",
+	}
+	err, agentModel := CheckAgentExists(indentifyAgent, c)
+	if err != nil {
+		log.Println(err)
+		if gorm.IsRecordNotFoundError(err) {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		if err.Error() == "Not found" {
+			return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(404, "Not found")
+		}
+		return &agentpb.AgentResponse{Status: agentpb.AgentResponseStatus_FAIL}, status.Error(500, "Internal server error")
+	}
+	if in.Version != agentModel.Version {
+		err := c.DB.Db.Model(&agentModel).Updates(model.Agent{
+			Version: in.Version,
+		}).Error
+		if err != nil {
+			return &agentpb.AgentResponse{
+				Status: agentpb.AgentResponseStatus_FAIL,
+				Agents: nil,
+			}, err
+		}
+	}
+	return &agentpb.AgentResponse{
+		Status: agentpb.AgentResponseStatus_FAIL,
+		Agents: nil,
+	}, nil
 }

@@ -24,6 +24,7 @@ message Agent {
     int64 run_thread = 13 [json_name = "run_thread"];
     string date_create = 14 [json_name = "date_create"];
     bool status = 15 [json_name = "status"];
+    string version = 16 [json_name = "version"];
 }
 
 /**
@@ -44,6 +45,7 @@ message AgentRequest {
     bool audio_monitor = 12 [json_name = "audio_monitor"];
     int64 run_thread = 13 [json_name = "run_thread"];
     bool status = 14 [json_name = "status"];
+    string version = 15 [json_name = "version"];
 }
 
 message AgentFilter {
@@ -57,6 +59,12 @@ message AgentUpdateStatus {
     int64 id = 1 [json_name = "id"];
     string ip_control = 2 [json_name = "ip_control"];
     bool status = 3 [json_name = "status"];
+}
+
+message AgentUpdateVersion {
+    int64 id = 1 [json_name = "id"];
+    string ip_control = 2 [json_name = "ip_control"];
+    string version = 3 [json_name = "version"];
 }
 
 message AgentActiveMonitor {
@@ -183,6 +191,12 @@ service AgentService {
     * Update Agent status
     */
     rpc UpdateStatus (AgentUpdateStatus) returns (AgentResponse) {
+    }
+
+    /**
+    * Update Agent version
+    */
+    rpc UpdateVersion (AgentUpdateVersion) returns (AgentResponse) {
     }
 
     /**

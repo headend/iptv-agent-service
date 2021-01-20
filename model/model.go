@@ -23,6 +23,7 @@ type Agent struct {
 	Date_create			time.Time `gorm:"column:date_create;type:datetime;default:null"`
 	Date_update			time.Time `gorm:"column:date_update;type:datetime;default:null"`
 	Status				bool `gorm:"column:status;default:false"`
+	Version				string `gorm:"column:version;type:char;size:5;default:null"`
 }
 
 
