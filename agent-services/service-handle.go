@@ -353,7 +353,7 @@ func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.Agent
 	}
 	if in.IsMonitor != agentModel.IsMonitor {
 		log.Println("Do update")
-		err := c.DB.Db.Model(&agentModel).Updates(map[string]interface{}{"is_monitor": in.IsMonitor, "date_update": time.Now()}).Error
+		err := c.DB.Db.Model(agentModel).Updates(map[string]interface{}{"is_monitor": in.IsMonitor, "date_update": time.Now()}).Error
 		if err != nil {
 			log.Println(err)
 			return &agentpb.AgentResponse{
@@ -390,7 +390,7 @@ func (c *agentServer) UpdateMonitorSignal(ctx context.Context, in *agentpb.Agent
 	}
 	if in.SignalMonitor != agentModel.Signal_Monitor {
 		log.Println("Do update ")
-		err := c.DB.Db.Model(&agentModel).Updates(map[string]interface{}{"signal_monitor": in.SignalMonitor, "date_update": time.Now()}).Error
+		err := c.DB.Db.Model(agentModel).Updates(map[string]interface{}{"signal_monitor": in.SignalMonitor, "date_update": time.Now()}).Error
 		if err != nil {
 			log.Println(err)
 			return &agentpb.AgentResponse{
@@ -427,7 +427,7 @@ func (c *agentServer) UpdateMonitorVideo(ctx context.Context, in *agentpb.AgentA
 	}
 	if in.VideoMonitor != agentModel.Video_Monitor {
 		log.Println("Do update ")
-		err := c.DB.Db.Model(&agentModel).Updates(map[string]interface{}{"video_monitor": in.VideoMonitor, "date_update": time.Now()}).Error
+		err := c.DB.Db.Model(agentModel).Updates(map[string]interface{}{"video_monitor": in.VideoMonitor, "date_update": time.Now()}).Error
 		if err != nil {
 			log.Println(err)
 			return &agentpb.AgentResponse{
