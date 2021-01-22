@@ -334,6 +334,7 @@ func (c *agentServer) UpdateRunthread(ctx context.Context, in *agentpb.AgentUpda
 // Active monitor
 func (c *agentServer) UpdateActiveMonitor(ctx context.Context, in *agentpb.AgentActiveMonitor) (*agentpb.AgentResponse, error) {
 	log.Println("Update is_monitor")
+	log.Println(in)
 	var agentModel model.Agent
 	indentifyAgent := IdentifyAgent{
 		AgentID:        in.Id,
