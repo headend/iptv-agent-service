@@ -4,12 +4,12 @@ go 1.13
 
 require (
 	github.com/golang/protobuf v1.4.3
-	github.com/headend/share-module v0.0.0-20201225012418-098bf8bf15bd
+	github.com/headend/share-module v0.0.0-20210120170123-1d1d3cc4f46f
 	github.com/jinzhu/gorm v1.9.16
-	golang.org/x/net v0.0.0-20201224014010-6772e930b67b // indirect
-	golang.org/x/sys v0.0.0-20201223074533-0d417f636930 // indirect
-	golang.org/x/text v0.3.4 // indirect
-	google.golang.org/genproto v0.0.0-20201214200347-8c77b98c765d // indirect
-	google.golang.org/grpc v1.34.0
+	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
+	golang.org/x/sys v0.0.0-20210122235752-a8b976e07c7b // indirect
+	golang.org/x/text v0.3.5 // indirect
+	google.golang.org/genproto v0.0.0-20210122163508-8081c04a3579 // indirect
+	google.golang.org/grpc v1.35.0
 	google.golang.org/protobuf v1.25.0
 )
