@@ -130,6 +130,7 @@ message ProfileMonitorElement {
     bool is_enable = 10 [json_name = "is_enable"];
     int64 channel_id = 11 [json_name = "channel_id"];
     string channel_name = 12 [json_name = "channel_name"];
+    string agent_location = 13 [json_name = "agent_location"];
 }
 
 message ProfileMonitorResponse {
